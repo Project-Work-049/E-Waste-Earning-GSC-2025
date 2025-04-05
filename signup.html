@@ -98,16 +98,16 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="VRDevS.png" alt="E-Waste Logo" class="logo-img">
+            <img src="/static/VRDevS.png" alt="E-Waste Logo" class="logo-img">
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="map.html">Collection Points</a></li>
-            <li><a href="donate.html">Donate E-Waste</a></li>
-            <li><a href="rewards.html">Rewards</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/map">Collection Points</a></li>
+            <li><a href="/donate">Donate E-Waste</a></li>
+            <li><a href="/rewards">Rewards</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
         </ul>
     </nav>
 
@@ -136,7 +136,7 @@
             <button type="submit" class="auth-button">Sign Up</button>
         </form>
         <div class="auth-links">
-            <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Already have an account? <a href="/login">Login</a></p>
         </div>
     </div>
     <script>
@@ -168,14 +168,14 @@
             .then(data => {
                 if (data.success) {
                     localStorage.setItem('userEmail', email);
-                    window.location.href = 'index.html';
+                    window.location.href = '/';
                 } else {
-                    alert('Registration failed. Please try again.');
+                    alert('You are already registered. Please Login.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred. Please try again.');
+                alert('An error occurred. Please try Again later.');
             });
 
             return false;
