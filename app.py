@@ -23,37 +23,37 @@ def init_excel_files():
 init_excel_files()
 
 
-@app.route('/')
+@app.route('index.html')
 def home():
     return send_from_directory('.', 'index.html')
 
 
-@app.route('/map')
+@app.route('map.html')
 def map():
     return send_from_directory('.', 'map.html')
 
 
-@app.route('/contact')
+@app.route('contact.html')
 def contact():
     return send_from_directory('.', 'contact.html')
 
 
-@app.route('/donate')
+@app.route('donate.html')
 def donate():
     return send_from_directory('.', 'donate.html')
 
 
-@app.route('/rewards')
+@app.route('rewards.html')
 def rewards():
     return send_from_directory('.', 'rewards.html')
 
 
-@app.route('/login')
+@app.route('login.html')
 def login_page():
     return send_from_directory('.', 'login.html')
 
 
-@app.route('/signup')
+@app.route('signup.html')
 def signup_page():
     return send_from_directory('.', 'signup.html')
 
