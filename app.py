@@ -58,9 +58,9 @@ def signup_page():
     return send_from_directory('.', 'signup.html')
 
 
-@app.route('/static/styles')
+@app.route('/static/<path:filename>')
 def serve_static(filename):
-    return send_from_directory('.', 'static/styles.css')
+    return send_from_directory('static', filename)
 
 
 @app.route('/api/signup', methods=['POST'])
