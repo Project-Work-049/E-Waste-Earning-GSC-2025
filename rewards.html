@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards - E-Waste Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .rewards-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 2rem;
+        }
+
+        .points-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideIn 1s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .points-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .reward-card {
+            background-color: rgba(44, 62, 80, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .coupon-code {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        .happy-face {
+            font-size: 3rem;
+            margin: 1rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="VRDevS.png" alt="E-Waste Logo" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Collection Points</a></li>
+            <li><a href="donate.html">Donate E-Waste</a></li>
+            <li><a href="rewards.html">Rewards</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="rewards-container">
+        <div class="points-card">
+            <div class="happy-face">😊</div>
+            <h2>Your Points</h2>
+            <div class="points-value" id="pointsValue">0</div>
+        </div>
+
+        <div class="rewards-grid">
+            <div class="reward-card" onclick="generateCoupon('EcoTech', 100)">
+                <h3>EcoLifestyle Store</h3>
+                <p>50% off on eco-friendly products</p>
+                <p>Points Required: 100</p>
+                <div class="coupon-code" id="coupon1"></div>
+            </div>
+
+            <div class="reward-card" onclick="generateCoupon('GreenLife', 200)">
+                <h3>GreenLife Market</h3>
+                <p>15% off on sustainable items</p>
+                <p>Points Required: 200</p>
+                <div class="coupon-code" id="coupon2"></div>
+            </div>
+
+            <div class="reward-card" onclick="generateCoupon('EcoRewards', 300)">
+                <h3>EcoTech Shop</h3>
+                <p>20% off on all products</p>
+                <p>Points Required: 300</p>
+                <div class="coupon-code" id="coupon3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get points from localStorage
+        const points = parseInt(localStorage.getItem('currentPoints')) || 0;
+        document.getElementById('pointsValue').textContent = points;
+
+        function generateCoupon(company, requiredPoints) {
+            if (points < requiredPoints) {
+                alert(`Sorry, you need ${requiredPoints} points for this reward!`);
+                return;
+            }
+
+            // Generate unique coupon code
+            const timestamp = Date.now().toString().slice(-6);
+            const randomStr = Math.random().toString(36).substring(2, 5).toUpperCase();
+            const couponCode = `${company}-${randomStr}${timestamp}`;
+
+            // Show coupon code with animation
+            const couponElement = event.currentTarget.querySelector('.coupon-code');
+            couponElement.textContent = couponCode;
+            couponElement.style.display = 'block';
+            couponElement.style.animation = 'slideIn 0.5s ease';
+
+            // Deduct points
+            const newPoints = points - requiredPoints;
+            localStorage.setItem('currentPoints', newPoints);
+            document.getElementById('pointsValue').textContent = newPoints;
+
+            // Save to Excel (through Python backend)
+            saveCouponToExcel(company, couponCode, requiredPoints);
+        }
+
+        function saveCouponToExcel(company, code, points) {
+            // Send data to Python backend
+            fetch('/api/save_coupon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    company: company,
+                    code: code,
+                    points: points
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Coupon saved:', data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html> 

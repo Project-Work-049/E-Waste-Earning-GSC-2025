@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Points - E-Waste Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #map {
+            height: 80vh;
+            width: 100%;
+            margin-top: 80px;
+        }
+        .map-container {
+            padding: 20px;
+        }
+        .leaflet-popup-content-wrapper {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .leaflet-popup-tip {
+            background-color: #2c3e50;
+        }
+        .error-message {
+            background-color: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="VRDevS.png" alt="E-Waste Logo" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html">Collection Points</a></li>
+            <li><a href="donate.html">Donate E-Waste</a></li>
+            <li><a href="rewards.html">Rewards</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <main class="map-container">
+        <h1>E-Waste Collection Points</h1>
+        <div class="map-controls">
+            <div class="search-box">
+                <input type="text" id="location-search" placeholder="Search location...">
+                <button onclick="searchLocation()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <label>
+                    <input type="checkbox" id="recycling-centers" checked> Recycling Centers
+                </label>
+                <label>
+                    <input type="checkbox" id="drop-off-points" checked> Drop-off Points
+                </label>
+            </div>
+        </div>
+        <div id="map"></div>
+        <div id="map-error" class="error-message" style="display: none;"></div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
