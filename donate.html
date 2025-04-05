@@ -1,173 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn From Your E Waste</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .donation-form {
-            max-width: 800px;
-            margin: 100px auto;
-            
-            padding: 2rem;
-            background-color: rgb(251, 230, 0);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Earn From Your E Waste</title>
+        <link rel="stylesheet" href="static/styles.css" />
+        <style>
+            .donation-form {
+                max-width: 800px;
+                margin: 100px auto;
 
-        .animated-title{
-            font-size: 50px;
-            text-align: center;
-            align-items: center;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        #ewasteType{
-            width: 40%;
-            padding: 10px;
-            outline: none;
-            border: none;
-            border-radius: 5px;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--secondary-color);
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.961);
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-
-        button {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            padding: 1rem 2rem;
-            border: 1px solid rgb(253, 142, 22);
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: whitesmoke;
-        }
-
-        .points-preview {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: rgba(39, 174, 96, 0.2);
-            border-radius: 5px;
-            display: none;
-        }
-
-        .eco-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="VRDevS.png" alt="E-Waste Logo" class="logo-img">
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="map.html">Collection Points</a></li>
-            <li><a href="donate.html">Donate E-Waste</a></li>
-            <li><a href="rewards.html">Rewards</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-        </ul>
-    </nav>
-
-    <div class="donation-form">
-        <div class="eco-icon">
-            <i class="fas fa-recycle"></i>
-        </div>
-        <h2 class="animated-title">Earn From Your E-Waste</h2>
-        <form id="donationForm" onsubmit="return handleSubmit(event)">
-            <div class="form-group">
-                <label for="ewasteType">Type of E-Waste</label>
-                <select id="ewasteType" required>
-                    <option value="">Select E-Waste Type</option>
-                    <option value="mobile">Mobile Phones</option>
-                    <option value="laptop">Laptops</option>
-                    <option value="desktop">Desktop Computers</option>
-                    <option value="other">Other Electronics</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="quantity">Quantity (in grams)</label>
-                <input type="number" id="quantity" min="1" required oninput="calculatePoints()">
-            </div>
-            <div class="points-preview" id="pointsPreview">
-                <h3>Estimated Points: <span id="pointsValue">0</span></h3>
-            </div>
-            <br>
-            <button type="submit">Earn Now</button>
-        </form>
-    </div>
-
-    <script>
-        function calculatePoints() {
-            const quantity = document.getElementById('quantity').value;
-            const type = document.getElementById('ewasteType').value;
-            let points = 0;
-
-            if (quantity && type) {
-                // Points calculation based on type and quantity
-                switch(type) {
-                    case 'mobile':
-                        points = Math.floor(quantity * 0.5);
-                        break;
-                    case 'laptop':
-                        points = Math.floor(quantity * 0.8);
-                        break;
-                    case 'desktop':
-                        points = Math.floor(quantity * 1);
-                        break;
-                    case 'other':
-                        points = Math.floor(quantity * 0.2);
-                        break;
-                }
-
-                document.getElementById('pointsValue').textContent = points;
-                document.getElementById('pointsPreview').style.display = 'block';
+                padding: 2rem;
+                background-color: rgb(251, 230, 0);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             }
-        }
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            const points = document.getElementById('pointsValue').textContent;
-            
-            // Store points in localStorage
-            localStorage.setItem('currentPoints', points);
-            
-            // Redirect to rewards page
-            window.location.href = 'rewards.html';
-            return false;
-        }
-    </script>
-</body>
-</html> 
+            .animated-title {
+                font-size: 50px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--secondary-color);
+            }
+
+            #ewasteType {
+                width: 40%;
+                padding: 10px;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+            }
+
+            input[type="number"] {
+                width: 100%;
+                padding: 0.8rem;
+                border: 2px solid var(--secondary-color);
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.961);
+                color: var(--text-color);
+                font-size: 1rem;
+            }
+
+            button {
+                background-color: var(--secondary-color);
+                color: var(--text-color);
+                padding: 1rem 2rem;
+                border: 1px solid rgb(253, 142, 22);
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: whitesmoke;
+            }
+
+            .points-preview {
+                margin-top: 1rem;
+                padding: 1rem;
+                background-color: rgba(39, 174, 96, 0.2);
+                border-radius: 5px;
+                display: none;
+            }
+
+            .eco-icon {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                animation: bounce 2s infinite;
+            }
+
+            @keyframes bounce {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="VRDevS.png" alt="E-Waste Logo" class="logo-img" />
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Collection Points</a></li>
+                <li><a href="donate.html">Donate E-Waste</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+
+        <div class="donation-form">
+            <div class="eco-icon">
+                <i class="fas fa-recycle"></i>
+            </div>
+            <h2 class="animated-title">Earn From Your E-Waste</h2>
+            <form id="donationForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group">
+                    <label for="ewasteType">Type of E-Waste</label>
+                    <select id="ewasteType" required>
+                        <option value="">Select E-Waste Type</option>
+                        <option value="mobile">Mobile Phones</option>
+                        <option value="laptop">Laptops</option>
+                        <option value="desktop">Desktop Computers</option>
+                        <option value="other">Other Electronics</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity (in grams)</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        min="1"
+                        required
+                        oninput="calculatePoints()"
+                    />
+                </div>
+                <div class="points-preview" id="pointsPreview">
+                    <h3>Estimated Points: <span id="pointsValue">0</span></h3>
+                </div>
+                <br />
+                <button type="submit">Earn Now</button>
+            </form>
+        </div>
+
+        <script>
+            function calculatePoints() {
+                const quantity = document.getElementById("quantity").value;
+                const type = document.getElementById("ewasteType").value;
+                let points = 0;
+
+                if (quantity && type) {
+                    // Points calculation based on type and quantity
+                    switch (type) {
+                        case "mobile":
+                            points = Math.floor(quantity * 0.5);
+                            break;
+                        case "laptop":
+                            points = Math.floor(quantity * 0.8);
+                            break;
+                        case "desktop":
+                            points = Math.floor(quantity * 1);
+                            break;
+                        case "other":
+                            points = Math.floor(quantity * 0.2);
+                            break;
+                    }
+
+                    document.getElementById("pointsValue").textContent = points;
+                    document.getElementById("pointsPreview").style.display =
+                        "block";
+                }
+            }
+
+            function handleSubmit(event) {
+                event.preventDefault();
+                const points =
+                    document.getElementById("pointsValue").textContent;
+
+                // Store points in localStorage
+                localStorage.setItem("currentPoints", points);
+
+                // Redirect to rewards page
+                window.location.href = "rewards.html";
+                return false;
+            }
+        </script>
+    </body>
+</html>
